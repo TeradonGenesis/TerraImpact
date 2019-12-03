@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<div class="columns is-6 is-centered has-text-centered">
+    <div class="column is-6">
+           <h4 class="has-text-left"><i class="fas fa-chevron-left"></i>  <%= link_to 'Back', impacts_path %> | <%= link_to 'Edit', edit_impact_path(@impact) %></h4>
+           <br/>
+            <h2 class="has-text-left">Show Impact</h2>
+              <div class="box">
+              <article class="media">
+                  <div class="media-content">
+                      <div class="content">
+                          <p><strong><%= @impact.user.name if @impact.user %></strong> <span class="has-text-weight-light">@<%= @impact.user.username if @impact.user %>  </span>&nbsp;<span class="has-text-grey-light"><i class="far fa-calendar"></i><%= @impact.created_at.strftime("%d %b %Y") %></span></p>
+
+                          <p><%= @impact.impact %></p>
+                            <br>
+                          <p class="has-text-grey-light"><i class="fas fa-tags"></i> <%= @impact.category %></p>
+                      </div>
+                  </div>
+              </article>
+          </div>
+    </div>
+</div>
+

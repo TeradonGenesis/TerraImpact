@@ -1,0 +1,27 @@
+
+
+  <% @impacts.each do |impact| %>
+      <div class="box">
+          <article class="media">
+              <div class="media-left">
+                  <figure class="is-64x64 image">
+                        <% if impact.user.avatar.attached? %>
+                            <%= link_to image_tag(impact.user.avatar, class: "profile-img"), user_path(impact.user), class: "colorbox" %>
+                        <% else %>
+                            <%= link_to gravatar_image_tag(impact.user.email, size: 64, alt: impact.user.name), user_path(impact.user), class: "colorbox" %>
+                        <% end %>
+                  </figure>
+              </div>
+              <div class="media-content">
+                  <div class="content">
+                      <p><strong><%= link_to impact.user.name , user_path(impact.user) %></strong> <span class="has-text-weight-light">@<%= impact.user.username if impact.user %>  </span>&nbsp;<span class="has-text-grey-light"><i class="far fa-calendar"></i><%= impact.created_at.strftime("%d %b %Y") %></span></p>
+
+                      <p><%= impact.impact %></p>
+                        <br>
+                      <p class="has-text-grey-light"><i class="fas fa-tags"></i> <%= impact.category %></p>
+                  </div>
+              </div>
+          </article>
+      </div>
+<% end %>
+    

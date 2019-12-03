@@ -1,0 +1,78 @@
+<div class="is-8 column">
+  <% if user_signed_in? %>
+      <div class="box">
+        <div>
+            <h2>My Profile</h2>
+        </div>
+         <article class="media">
+                  <div class="media-left">
+                      <figure class="is-128x128 image">
+                          <% if current_user.avatar.attached? %>
+                            <%= link_to image_tag(current_user.avatar, class: "profile-img"), user_path(current_user), class: "colorbox" %>
+                        <% else %>
+                            <%= link_to gravatar_image_tag(current_user.email, size: 64, alt: current_user.name), user_path(current_user), class: "colorbox" %>
+                        <% end %>
+                      </figure>
+                  </div>
+                  <div class="media-content">
+                      <div class="content">
+                          <br>
+                          <h3><%= current_user.name %></h3>
+                          <h4>@<%= current_user.username %></h4>
+                      </div>
+                  </div>
+        </article>
+        <div class="description">
+            <p><%= current_user.description %></p>
+        </div>
+        <hr/>
+        <div class="columns has-text-centered">
+            <div class="column ">
+                <h5 class="has-text-grey">Impacts</h5>
+                <h4 class="has-text-weight-bold has-text-info"><%= current_user.impacts.count %></h4>
+            </div>
+            <div class="column ">
+                <h5 class="has-text-grey">Joined</h5>
+                <h4 class="has-text-weight-bold has-text-info"><%= current_user.created_at.strftime("%d %b %Y") %></h4>
+            </div>
+        </div>
+      </div>
+  <% end %>
+  <br/>
+   <div>
+        <%= form_tag(impacts_path, method: :get) do %>
+          Category <%= text_field_tag :category, params[:category] %>
+          <%= submit_tag 'Search', class: "button is-info is-small", category: nil %>
+          <%= submit_tag 'Reset', class: "button is-info is-small", category: nil %>
+        <% end %>
+    </div>
+    <br/>
+    <article class="box media">
+        <figure class="media-left">
+            <p class="is-64x64 image">
+                 <% if user_signed_in? %>
+                      <% if current_user.avatar.attached? %>
+                            <%= link_to image_tag(current_user.avatar, class: "profile-img"), user_path(current_user), class: "colorbox" %>
+                        <% else %>
+                            <%= link_to gravatar_image_tag(current_user.email, size: 64, alt: current_user.name), user_path(current_user), class: "colorbox" %>
+                        <% end %>
+                 <% end %>
+            </p>
+        </figure>
+        <div class="media-content">
+            <%= render 'impacts/form' %>
+        </div>
+    </article>
+
+<% if (@impacts.empty?) %>
+   <p>No impacts found</p>
+<% else %>
+    <% if user_signed_in? %>
+        <%= render 'tabpanels' %>
+    <% else %>
+        <%= render 'impactlist' %>
+    <% end %>
+<% end %>
+</div>
+
+

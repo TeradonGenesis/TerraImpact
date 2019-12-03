@@ -1,0 +1,5 @@
+Multiple rails server commands
+
+rails s
+rails s -p 3001 -P tmp/server_web.pid
+rails s -p 3002 -P tmp/server_ds.pid

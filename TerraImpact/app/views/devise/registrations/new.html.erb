@@ -1,0 +1,101 @@
+<div class="section">
+    <div class="container">
+        <div class="columns is-centered">
+        
+        <div class="column is-5">
+        
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+                <h5 class="has-text-danger"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being registered:</h5>
+                <ul>
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <li class="has-text-danger"> * <%= msg %></li>    
+                  <% end %>
+                </ul>
+             </div>
+        <% end %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+        
+
+        <h1 class="title">Sign Up</h1>
+        
+        <div class="field">
+            <div class="control">
+               <p class="has-text-weight-bold">Profile Photo *Optional</p>
+                <%= f.file_field :avatar,
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+               <p class="has-text-weight-bold">User Description *Optional</p>
+                <%= f.input :description,
+                hint: "Limit to 280 words",
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <%= f.input :username,
+                required: true,
+                :required => 'required',
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <%= f.input :name,
+                required: true,
+                :required => 'required',
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        
+        <div class="field">
+            <div class="control">
+                <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { class:"input" }, wrapper:false, label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <%= f.input :password_confirmation,
+                required: true,
+                input_html: { class:"input" }, wrapper:false, label_html: { class:"label"} %>
+            </div>        
+        </div>
+
+        <div class="field">
+            <div class="control">
+            <%= f.button :submit, "Sign up", class:"button is-small is-info" %>
+            </div>
+            <% end %>
+        </div>
+        
+        
+        <%= render "devise/shared/links" %>
+        </div>
+        </div>
+    </div>
+</div>

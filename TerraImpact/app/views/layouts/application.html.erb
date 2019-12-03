@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TerraImpact</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="//use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+   <style>
+       .tab-content {
+            display: none;
+
+        }
+       
+       .is-active {
+          display: block;
+        }
+    </style>
+    <nav class="navbar is-info">
+       <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+            <h1 class="title is-5">TerraImpact</h1>
+        <% end%>
+            <div class="navbar-burger burger" data-target="navbarExample">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="navbar-header" class="navbar-menu">
+            <div class="navbar-end">
+                <div class="field is-grouped">
+                    <p class="control">
+                        <%= link_to 'New Impact', new_impact_path, class: "button is-info is-inverted" %>
+                    </p>
+                    <% if user_signed_in? %>
+                        <p class="control">
+                            <%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
+                        </p>
+                        <p class="control">
+                            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-info" %>
+                        </p>
+                    <% else %>
+                        <p class="control">
+                            <%= link_to "Sign In", new_user_session_path, class: "button is-info" %>
+                        </p>
+                        <p class="control">
+                            <%= link_to "Sign Up", new_user_registration_path, class: "button is-info" %>
+                        </p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <%if flash[:notice] %>
+        <div class="notification is-primary global notification">
+            <p class="notice"><%= notice %></p>
+        </div>
+    <% end %>
+    <% if flash[:alert] %>
+        <div class="notification is-danger global-notification">
+            <p class="alert"><%= alert %></p>
+        </div>
+    <% end %>
+    <%= yield %>
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+    <script>
+        $('.tabs').each(function(index) {
+          var $tabParent = $(this);
+          var $tabs = $tabParent.find('li');
+          var $contents = $tabParent.next('.tabs-content').find('.tab-content');
+
+          $tabs.click(function() {
+            var curIndex = $(this).index();
+            // toggle tabs
+            $tabs.removeClass('is-active');
+            $tabs.eq(curIndex).addClass('is-active');
+            // toggle contents
+            $contents.removeClass('is-active');
+            $contents.eq(curIndex).addClass('is-active');
+          });
+        });
+    </script>
+  </body>
+</html>

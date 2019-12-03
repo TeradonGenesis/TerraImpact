@@ -1,0 +1,30 @@
+<div class="column">
+    <nav class="panel">
+          <div class="panel-heading">
+            Interested? Check them out!
+          </div>
+          <% @users.each do |user| %>
+              <div class="panel-block">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-32x32">
+                            <% if user.avatar.attached? %>
+                                <%= link_to image_tag(user.avatar, class: "profile-img"), user_path(user), class: "colorbox" %>
+                            <% else %>
+                                <%= link_to gravatar_image_tag(user.email, size: 64, alt: user.name), user_path(user), class: "colorbox" %>
+                            <% end %>
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                            <p><%= link_to user.name, user %>  <strong>@<%= user.username %></strong></p>
+
+                            </div>
+                        </div>
+                    </div>
+              </div>
+          <% end %>
+    </nav>
+</div>
+
+
