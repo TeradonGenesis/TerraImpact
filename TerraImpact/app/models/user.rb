@@ -4,7 +4,7 @@ class User < ApplicationRecord
     include Friendlyable
     validates :username, presence: :true, uniqueness: { case_sensitive: false }
     validates :name, presence: :true, uniqueness: { case_sensitive: false }
-    validates :description, length: { maximum: 120 }
+    validates :description, length: { maximum: 280 }
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
     
     has_one_attached :avatar

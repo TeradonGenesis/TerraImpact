@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
     protected
 
     def configure_permitted_parameters
-        added_attrs_sign_up = [:name, :username, :email, :password, :password_confirmation, :avatar, :description]
-        added_attrs_update = [:name, :username, :email, :password, :password_confirmation, :current_password, :avatar, :description]
+        added_attrs_sign_up = [:name, :username, :email, :password, :password_confirmation, :avatar, :description, :admin]
+        added_attrs_update = [:name, :username, :email, :password, :password_confirmation, :current_password, :avatar, :description, :admin]
         devise_parameter_sanitizer.permit :sign_up, keys: added_attrs_sign_up
         devise_parameter_sanitizer.permit :account_update, keys: added_attrs_update
     end
@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
     def not_found
       raise ActionController::RoutingError.new('Not Found')
     end
+    
 end

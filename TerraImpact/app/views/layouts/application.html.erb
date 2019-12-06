@@ -40,7 +40,12 @@
                         <%= link_to 'New Impact', new_impact_path, class: "button is-info is-inverted" %>
                     </p>
                     <% if user_signed_in? %>
-                        <p class="control">
+                        <% if current_user.admin? %>
+                            <p class="control">
+                                <%= link_to "Admin Panel", users_path, class: "button is-info" %>
+                            </p>
+                        <% end %>
+                         <p class="control">
                             <%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
                         </p>
                         <p class="control">

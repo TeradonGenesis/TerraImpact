@@ -1,5 +1,5 @@
 <% if user_signed_in? && current_user.admin? %>
-      <%= render 'users-detail' %>
+      <%= render 'create-user' %>
 <% else %>
       <%  controller.redirect_to root_path, alert: 'Admins only!' %> 
 <% end %>

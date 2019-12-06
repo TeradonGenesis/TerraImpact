@@ -1,0 +1,82 @@
+<div class="section">
+    <div class="container">
+        <div class="columns is-centered">
+        
+        <div class="column is-5">
+        <h4><i class="fas fa-chevron-left"></i>  <%= link_to 'Back', impacts_path %></h4>
+        <br/>
+        
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+                <h5 class="has-text-danger"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being registered:</h5>
+                <ul>
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <li class="has-text-danger"> * <%= msg %></li>    
+                  <% end %>
+                </ul>
+             </div>
+        <% end %>
+        <%= simple_form_for(@user) do |f| %>
+        <%= f.error_notification %>
+        
+
+        <h1 class="title">Edit <%= @user.name %></h1>
+        
+        <div class="field">
+            <div class="control">
+               <p class="has-text-weight-bold">Profile Photo</p>
+                <%= f.file_field :avatar,
+                required: false,
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+               <p class="has-text-weight-bold">User Description *Optional</p>
+                <%= f.input :description,
+                hint: "Limit to 280 words",
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <%= f.input :username,
+                required: false,
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <%= f.input :name,
+                required: false,
+                autofocus: true,
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %>
+            </div>        
+        </div>
+        
+        <div class="field">
+            <div class="control">
+                <%= f.check_box :admin,
+                hint: "Check the box if the user is admin",
+                input_html: { class:"input" }, wrapper:false,label_html: { class:"label"} %> Is the user an admin? (optional)
+            </div>        
+        </div>
+
+        <div class="field">
+            <div class="control">
+            <%= f.button :submit, "Update", class:"button is-small is-info" %>
+            </div>
+            
+        </div>
+        <% end %>
+        
+        </div>
+        </div>
+    </div>
+</div>
