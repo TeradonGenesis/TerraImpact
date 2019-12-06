@@ -5,9 +5,15 @@
             <%= f.input :impact, label: "Show your impact!", input_html: {class: "textarea"}, wrapper:false, label_html: {class: "label"}, placeholder: "Create a new impact" %>
         </div>
         <br/>
-        <div class="control ">
-            <p><%= f.input :category, label: "Choose a category", :collection => ['Technology', 'Science', 'Politics', 'Anime', 'Games', 'Others'],  wrapper:false, label_html: {class: "label"}, placeholder: "Chhose a category" %></p>
-        </div>
+        <% if current_user.admin? %>
+            <div class="control ">
+                <p><%= f.input :category, label: "Choose a category", :collection => ['Maintenace', 'Warning', 'Error'],  wrapper:false, label_html: {class: "label"}, placeholder: "Chhose a category" %></p>
+            </div>
+        <% else %>
+            <div class="control ">
+                <p><%= f.input :category, label: "Choose a category", :collection => ['Technology', 'Science', 'Politics', 'Anime', 'Games', 'Others'],  wrapper:false, label_html: {class: "label"}, placeholder: "Chhose a category" %></p>
+            </div>
+        <% end %>
     </div>
     <div class="control has-margin-top-4">
     <%= f.button :submit, class: "button is-info" %>

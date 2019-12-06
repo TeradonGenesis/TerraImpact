@@ -24,6 +24,7 @@
 
                               <p><%= impact.impact %></p>
                                 <br>
+                                
                               <p class="has-text-grey-light"><i class="fas fa-tags"></i> <%= impact.category %></p>
                           </div>
                           <% if user_signed_in? && (current_user.id == impact.user_id || current_user.admin?) %>
