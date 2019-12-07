@@ -13,7 +13,7 @@ class ImpactsController < ApplicationController
     end
       
     @users = User.where('admin = ? ', false).order("created_at DESC")
-  
+    fresh_when etag: @impacts
     
     @impact = Impact.new
   end
@@ -22,6 +22,7 @@ class ImpactsController < ApplicationController
   # GET /impacts/1.json
   def show
       @impact = Impact.friendly.find(params[:id]) 
+      fresh_when etag: @impact
   end
 
   # GET /impacts/new

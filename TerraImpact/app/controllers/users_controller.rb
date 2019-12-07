@@ -3,10 +3,13 @@ class UsersController < ApplicationController
     @users = User.all.order("id")
     @normal_users = User.where('admin = ? ', false).order("id")
     @admins = User.where('admin = ? ', true).order("id")
+    fresh_when etag: @normal_users
+    fresh_when etag: @admins
   end
     
   def show
     @user = User.friendly.find(params[:id])
+    fresh_when etag: @user
   end
     
   def new
