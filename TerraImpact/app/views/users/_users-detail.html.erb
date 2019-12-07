@@ -15,6 +15,14 @@
           </div>
           <div class="tabs-content">
               <div class="tab-content is-active">
+                    <%= form_tag(users_path, method: :get) do %>
+                      Username <%= text_field_tag :username, params[:username] %>
+                      <%= submit_tag 'Search', class: "button is-info is-small", name: nil %>
+                      <%= link_to users_path, class: "button is-info is-small" do %>
+                          <span><i class="fas fa-undo"></i> Cancel</span>
+                      <% end %>
+                    <% end %>
+                    <br/>
                    <table class="table">
                         <thead>
                         <tr>

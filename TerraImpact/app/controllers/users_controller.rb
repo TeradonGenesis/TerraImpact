@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   def index
     @users = User.all.order("id")
-    @normal_users = User.where('admin = ? ', false).order("id")
+    if params[:username]
+        @normal_users = User.where('admin = ? AND username ILIKE ?', false, "%#{params[:username]}%").order("id")
+    else
+        @normal_users = User.where('admin = ? ', false).order("id")
+    end
     @admins = User.where('admin = ? ', true).order("id")
     fresh_when etag: @normal_users
     fresh_when etag: @admins

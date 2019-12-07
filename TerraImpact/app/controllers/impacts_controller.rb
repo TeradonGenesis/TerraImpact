@@ -7,13 +7,14 @@ class ImpactsController < ApplicationController
   def index
       
     if params[:category]
-        @impacts = Impact.where('category LIKE ?', "%#{params[:category]}%").order("created_at DESC")
+        @impacts = Impact.where('category ILIKE ?', "%#{params[:category]}%").order("created_at DESC")
     else
         @impacts = Impact.all.order("created_at DESC")
     end
       
     @users = User.where('admin = ? ', false).order("created_at DESC")
     fresh_when etag: @impacts
+    fresh_when etag: @users
     
     @impact = Impact.new
   end

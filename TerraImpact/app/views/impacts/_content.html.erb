@@ -43,8 +43,12 @@
         <%= form_tag(impacts_path, method: :get) do %>
           Category <%= text_field_tag :category, params[:category] %>
           <%= submit_tag 'Search', class: "button is-info is-small", category: nil %>
-          <%= submit_tag 'Reset', class: "button is-info is-small", category: nil %>
+          <%= link_to impacts_path, class: "button is-info is-small" do %>
+              <span><i class="fas fa-undo"></i> Cancel</span>
+          <% end %>
         <% end %>
+        
+    
     </div>
     <br/>
     <article class="box media">
